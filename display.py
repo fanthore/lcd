@@ -90,24 +90,28 @@ def main():
     lcd_init()
 
     while True:
-        r = requests.get("http://living-room.local/api/v1/getstate")
+        volumios = ["living-room", "kitchen"]
 
-        try:
-            y = json.loads(r.text)
-            if y["artist"] is None: 
-                Art = "Empty"
-            else: 
-                Art = y["artist"]
-            if y["title"] is None: 
-                Son = "Empty"
-            else: 
-                Son = y["title"]
-            # Send some test
-            lcd_string(Art, LCD_LINE_1)
-            lcd_string(Son, LCD_LINE_2)
-        except (ValueError, KeyError, TypeError):
-            print "Error"
-        time.sleep(5)
+        for device in volumios:
+            r = requests.get("http://device.local/api/v1/getstate")
+
+            try:
+                y = json.loads(r.text)
+                if y["artist"] is None:
+                    Art = "Empty"
+                else:
+                    Art = y["artist"]
+                if y["title"] is None:
+                    Son = "Empty"
+                else:
+                    Son = y["title"]
+                # Send some test
+                lcd_string(Art, LCD_LINE_1)
+                lcd_string(Son, LCD_LINE_2)
+            except (ValueError, KeyError, TypeError):
+                print "Error"
+            time.sleep(5)
+
 
 if __name__ == '__main__':
 
