@@ -94,29 +94,20 @@ def main():
 
         try:
             y = json.loads(r.text)
-            Art = y["artist"]
-            Son = y["title"]
+            if y["artist"] is None: 
+                Art = "Empty"
+            else: 
+                Art = y["artist"]
+            if y["title"] is None: 
+                Son = "Empty"
+            else: 
+                Son = y["title"]
             # Send some test
             lcd_string(Art, LCD_LINE_1)
             lcd_string(Son, LCD_LINE_2)
         except (ValueError, KeyError, TypeError):
             print "Error"
         time.sleep(5)
-
-    # Send some more text
-
-        r = requests.get("http://kitchen.local/api/v1/getstate")
-
-        try:
-            y = json.loads(r.text)
-            Art = y["artist"]
-            Son = y["title"]
-            lcd_string(Art, LCD_LINE_1)
-            lcd_string(Son, LCD_LINE_2)
-        except (ValueError, KeyError, TypeError):
-            print "Error"
-        time.sleep(5)
-
 
 if __name__ == '__main__':
 
