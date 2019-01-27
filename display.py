@@ -7,7 +7,7 @@ import json
 # I2C device address, if any error, change this address to 0x3f
 I2C_ADDR = 0x27
 # Maximum characters per line
-LCD_WIDTH = 16 
+LCD_WIDTH = 16
 
 # Define some device constants
 # Mode - Sending data
@@ -116,7 +116,7 @@ def main():
         except (ValueError, KeyError, TypeError):
             print "Error"
         time.sleep(5)
-    
+
 
 if __name__ == '__main__':
 
