@@ -7,7 +7,7 @@ import json
 # I2C device address, if any error, change this address to 0x3f
 I2C_ADDR = 0x27
 # Maximum characters per line
-LCD_WIDTH = 16  
+LCD_WIDTH = 16 
 
 # Define some device constants
 # Mode - Sending data
@@ -90,7 +90,7 @@ def main():
     lcd_init()
 
     while True:
-        r = requests.get("http://192.168.1.48/api/v1/getstate")
+        r = requests.get("http://living-room.local/api/v1/getstate")
 
         try:
             y = json.loads(r.text)
@@ -105,7 +105,7 @@ def main():
 
     # Send some more text
 
-        r = requests.get("http://192.168.1.48/api/v1/getstate")
+        r = requests.get("http://kitchen.local/api/v1/getstate")
 
         try:
             y = json.loads(r.text)
