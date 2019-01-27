@@ -101,24 +101,22 @@ def main():
             lcd_string(Son, LCD_LINE_2)
         except (ValueError, KeyError, TypeError):
             print "Error"
-
-    time.sleep(5)
+        time.sleep(5)
 
     # Send some more text
 
-    r = requests.get("http://192.168.1.48/api/v1/getstate")
+        r = requests.get("http://192.168.1.48/api/v1/getstate")
 
-    try:
-        y = json.loads(r.text)
-        Art = y["artist"]
-        Son = y["title"]
-        lcd_string(Art, LCD_LINE_1)
-        lcd_string(Son, LCD_LINE_2)
-    except (ValueError, KeyError, TypeError):
-        print "Error"
-
-    time.sleep(5)
-
+        try:
+            y = json.loads(r.text)
+            Art = y["artist"]
+            Son = y["title"]
+            lcd_string(Art, LCD_LINE_1)
+            lcd_string(Son, LCD_LINE_2)
+        except (ValueError, KeyError, TypeError):
+            print "Error"
+        time.sleep(5)
+    
 
 if __name__ == '__main__':
 
