@@ -93,7 +93,8 @@ def main():
         volumios = ["living-room", "kitchen"]
 
         for device in volumios:
-            r = requests.get("http://device.local/api/v1/getstate")
+            url = "http://"+ device + ".local/api/v1/getstate"
+            r = requests.get(url)
 
             try:
                 y = json.loads(r.text)
