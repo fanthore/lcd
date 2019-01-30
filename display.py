@@ -85,7 +85,8 @@ def lcd_string(message, line):
 
 def scroll(text):
     for i in range(8):
-        text[1:]+text[0]
+        text = text[1:]+text[0]
+        print(text)
         time.sleep(0.5)
         i += 1
 
