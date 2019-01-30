@@ -83,6 +83,13 @@ def lcd_string(message, line):
         lcd_byte(ord(message[i]), LCD_CHR)
 
 
+def scroll(text):
+    for i in range(8):
+        text[1:]+text[0]
+        time.sleep(0.5)
+        i += 1
+
+
 def main():
     # Main program block
 
@@ -93,7 +100,7 @@ def main():
         volumios = ["living-room", "kitchen"]
 
         for device in volumios:
-            url = "http://"+ device + ".local/api/v1/getstate"
+            url = "http://" + device + ".local/api/v1/getstate"
             r = requests.get(url)
 
             try:
