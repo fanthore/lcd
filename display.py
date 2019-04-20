@@ -82,13 +82,13 @@ def lcd_string(message, line):
     for i in range(LCD_WIDTH):
         lcd_byte(ord(message[i]), LCD_CHR)
 
+
 def scroll(text):
     for i in range(8):
         text = text[1:]+text[0]
         time.sleep(0.5)
         print(text)
         i += 1
-
 
 
 def main():
