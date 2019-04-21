@@ -2,6 +2,7 @@ import smbus
 import time
 import requests
 import json
+from os import system
 
 # Define some device parameters
 # I2C device address, if any error, change this address to 0x3f
@@ -86,9 +87,14 @@ def lcd_string(message, line):
 def scroll(text):
     for i in range(8):
         text = text[1:]+text[0]
-        time.sleep(0.5)
         print(text)
         i += 1
+        time.sleep(0.5)
+        clear()
+
+
+def clear():
+    system('clear')
 
 
 def main():
