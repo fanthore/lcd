@@ -85,7 +85,7 @@ def lcd_string(message, line):
 
 
 def scroll(text):
-    for i in range(8):
+    for i in range(16):
         text = text[1:]+text[0]
         print(text)
         i += 1
@@ -120,7 +120,20 @@ def main():
                     Son = "Empty"
                 else:
                     Son = y["title"]
-                # Send some test
+                # Send some text
+                if len(Art) > LCD_WIDTH or len(Son) > LCD_WIDTH:
+                    for i in range(8):
+                        lcd_string(Art, LCD_LINE_1)
+                        lcd_string(Son, LCD_LINE_2)
+                        Art = Art[1:]+Art[0]
+                        Son = Son[1:]+Son[0]
+                        i += 1
+                        time.sleep(0.5)
+                else:
+                    lcd_string(Art, LCD_LINE_1)
+                    lcd_string(Son, LCD_LINE_2)
+                    time.sleep(8)
+
                 scrollText1 = lcd_string(Art, LCD_LINE_1)
                 scrollText2 = lcd_string(Son, LCD_LINE_2)
                 scroll(scrollText1)
