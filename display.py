@@ -121,6 +121,9 @@ def main():
                 else:
                     song = json_result["title"]
                 # Send some text
+                if len(artist) < LCD_WIDTH:
+                    while len(artist) < LCD_WIDTH:
+                        artist = artist + " "
                 if len(artist) > LCD_WIDTH or len(song) > LCD_WIDTH:
                     for i in range(8):
                         lcd_string(artist, LCD_LINE_1)
