@@ -134,11 +134,6 @@ def main():
                     lcd_string(Son, LCD_LINE_2)
                     time.sleep(8)
 
-                scrollText1 = lcd_string(Art, LCD_LINE_1)
-                scrollText2 = lcd_string(Son, LCD_LINE_2)
-                scroll(scrollText1)
-                scroll(scrollText2)
-
             except (ValueError, KeyError, TypeError):
                 print "Error"
             time.sleep(5)
