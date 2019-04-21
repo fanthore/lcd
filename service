@@ -1,0 +1,9 @@
+description "LCD display"
+author  "fanthore@gmail.com"
+
+start on runlevel [234]
+stop on runlevel [0156]
+
+chdir /root/lcd/
+exec /root/lcd/display.py
+respawn
