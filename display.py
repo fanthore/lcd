@@ -126,6 +126,8 @@ def main():
                         artist = artist + " "
                 if len(artist) > LCD_WIDTH or len(song) > LCD_WIDTH:
                     for i in range(16):
+                        artist = artist + " * "
+                        song = song + " * "
                         lcd_string(artist, LCD_LINE_1)
                         lcd_string(song, LCD_LINE_2)
                         artist = artist[1:]+artist[0]
