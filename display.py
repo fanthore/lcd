@@ -2,6 +2,7 @@ import smbus
 import time
 import requests
 import json
+from os import system
 
 # Define some device parameters
 # I2C device address, if any error, change this address to 0x3f
@@ -84,11 +85,16 @@ def lcd_string(message, line):
 
 
 def scroll(text):
-    for i in range(8):
+    for i in range(16):
         text = text[1:]+text[0]
-        time.sleep(0.5)
         print(text)
         i += 1
+        time.sleep(0.5)
+        clear()
+
+
+def clear():
+    system('clear')
 
 
 def main():
@@ -102,23 +108,37 @@ def main():
 
         for device in volumios:
             url = "http://" + device + ".local/api/v1/getstate"
-            r = requests.get(url)
+            get_json = requests.get(url)
 
             try:
-                y = json.loads(r.text)
-                if y["artist"] is None:
-                    Art = "Empty"
+                json_result = json.loads(get_json.text)
+                if json_result["artist"] is None:
+                    artist = "Empty"
                 else:
-                    Art = y["artist"]
-                if y["title"] is None:
-                    Son = "Empty"
+                    artist = json_result["artist"]
+                if json_result["title"] is None:
+                    song = "Empty"
                 else:
-                    Son = y["title"]
-                # Send some test
-                lcd_string(Art, LCD_LINE_1)
-                lcd_string(Son, LCD_LINE_2)
+                    song = json_result["title"]
+                # Send some text
+                if len(artist) < LCD_WIDTH:
+                    while len(artist) < LCD_WIDTH:
+                        artist = artist + " "
+                if len(artist) > LCD_WIDTH or len(song) > LCD_WIDTH:
+                    for i in range(16):
+                        lcd_string(artist, LCD_LINE_1)
+                        lcd_string(song, LCD_LINE_2)
+                        artist = artist[1:]+artist[0]
+                        song = song[1:]+song[0]
+                        i += 1
+                        time.sleep(0.5)
+                else:
+                    lcd_string(artist, LCD_LINE_1)
+                    lcd_string(song, LCD_LINE_2)
+                    time.sleep(8)
+
             except (ValueError, KeyError, TypeError):
-                print "Error"
+                print("Error")
             time.sleep(5)
 
 
