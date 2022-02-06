@@ -138,7 +138,7 @@ def main():
                     time.sleep(8)
 
             except (ValueError, KeyError, TypeError):
-                print "Error"
+                print("Error")
             time.sleep(5)
 
 
